@@ -8,30 +8,77 @@
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
     <style>
         body { font-family: 'Roboto', sans-serif; }
-        .hero-bg { background-size: cover; background-position: center; }
-        .qr-code { width: 100px; height: 100px; object-fit: cover; transition: transform 0.2s; }
+        .hero-bg { 
+            background-size: cover; 
+            background-position: center; 
+            background-repeat: no-repeat;
+        }
+        .qr-code { 
+            width: 100px; 
+            height: 100px; 
+            object-fit: cover; 
+            transition: transform 0.2s; 
+            border: 1px solid #e2e8f0;
+            border-radius: 8px;
+        }
         .qr-code:hover { transform: scale(1.1); }
-        .amenity-img { transition: transform 0.2s; }
-        .amenity-img:hover { transform: scale(1.05); }
-        .fade-in { opacity: 0; transform: translateY(20px); transition: all 0.6s ease-out; }
-        .fade-in.visible { opacity: 1; transform: translateY(0); }
-        .slider { position: relative; overflow: hidden; }
-        .slide { display: none; }
-        .slide.active { display: block; }
+        .amenity-img { 
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            height: 200px;
+            width: 100%;
+            object-fit: cover;
+            border-radius: 8px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+        .amenity-img:hover { 
+            transform: scale(1.03); 
+            box-shadow: 0 10px 15px rgba(0, 0, 0, 0.1);
+        }
+        .fade-in { 
+            opacity: 0; 
+            transform: translateY(20px); 
+            transition: all 0.6s ease-out; 
+        }
+        .fade-in.visible { 
+            opacity: 1; 
+            transform: translateY(0); 
+        }
+        .slider { 
+            position: relative; 
+            overflow: hidden; 
+            height: 500px;
+        }
+        .slide { 
+            display: none; 
+            height: 100%;
+        }
+        .slide.active { 
+            display: block; 
+            animation: fadeIn 1s ease-in-out;
+        }
+        @keyframes fadeIn {
+            from { opacity: 0.8; }
+            to { opacity: 1; }
+        }
+        .slide-content {
+            background: rgba(0, 0, 0, 0.5);
+            padding: 2rem;
+            border-radius: 8px;
+        }
     </style>
 </head>
 <body class="bg-gray-100">
     <!-- Header -->
-    <header class="bg-blue-600 text-white py-4 sticky top-0 z-10">
+    <header class="bg-blue-600 text-white py-4 sticky top-0 z-10 shadow-md">
         <div class="container mx-auto flex justify-between items-center px-4">
             <h1 class="text-2xl font-bold">Cosmo City & Docklands Saigon</h1>
             <nav class="flex items-center space-x-4">
-                <a href="#home" class="hover:underline">Trang Chủ</a>
-                <a href="#about" class="hover:underline">Giới Thiệu</a>
-                <a href="#location" class="hover:underline">Vị Trí</a>
-                <a href="#amenities" class="hover:underline">Tiện Ích</a>
-                <a href="#contact" class="hover:underline">Liên Hệ</a>
-                <select id="language" class="bg-blue-500 text-white border-none rounded p-1">
+                <a href="#home" class="hover:underline font-medium">Trang Chủ</a>
+                <a href="#about" class="hover:underline font-medium">Giới Thiệu</a>
+                <a href="#location" class="hover:underline font-medium">Vị Trí</a>
+                <a href="#amenities" class="hover:underline font-medium">Tiện Ích</a>
+                <a href="#contact" class="hover:underline font-medium">Liên Hệ</a>
+                <select id="language" class="bg-blue-500 text-white border-none rounded p-1 focus:outline-none">
                     <option value="vi">Tiếng Việt</option>
                     <option value="en">English</option>
                     <option value="zh">中文</option>
@@ -41,207 +88,368 @@
     </header>
 
     <!-- Hero Section with Slider -->
-    <section id="home" class="slider h-96">
-        <div class="slide active hero-bg h-full flex items-center justify-center text-white text-center" style="background-image: url('https://via.placeholder.com/1200x600?text=Banner+Cosmo+City');">
-            <div>
-                <h2 class="text-4xl font-bold mb-4">🌟 Cosmo City & Docklands Saigon</h2>
-                <p class="text-xl">Sống đẳng cấp tại trung tâm Quận 7</p>
-                <a href="#contact" class="mt-4 inline-block bg-yellow-500 text-white py-2 px-4 rounded hover:bg-yellow-600">Liên Hệ Ngay</a>
+    <section id="home" class="slider">
+        <div class="slide active hero-bg flex items-center justify-center" style="background-image: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.3)), url('https://www.cosmo-city.vn/uploads/banners/main-banner.jpg')">
+            <div class="slide-content text-center text-white">
+                <h2 class="text-4xl md:text-5xl font-bold mb-4">🌟 Cosmo City & Docklands Saigon</h2>
+                <p class="text-xl md:text-2xl mb-6">Sống đẳng cấp tại trung tâm Quận 7</p>
+                <a href="#contact" class="inline-block bg-yellow-500 hover:bg-yellow-600 text-white font-bold py-3 px-6 rounded-lg transition duration-300 transform hover:scale-105">
+                    Liên Hệ Ngay
+                </a>
             </div>
         </div>
-        <div class="slide hero-bg h-full" style="background-image: url('https://via.placeholder.com/1200x600?text=Căn+Hộ+Mẫu');"></div>
-        <div class="slide hero-bg h-full" style="background-image: url('https://via.placeholder.com/1200x600?text=Hồ+Bơi');"></div>
+        <div class="slide hero-bg" style="background-image: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.3)), url('https://www.cosmo-city.vn/uploads/gallery/living-room-1.jpg')"></div>
+        <div class="slide hero-bg" style="background-image: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.3)), url('https://www.cosmo-city.vn/uploads/amenities/pool-area.jpg')"></div>
     </section>
 
     <!-- About Section -->
-    <section id="about" class="container mx-auto py-12 fade-in">
-        <div class="bg-white rounded-lg shadow-lg p-8">
-            <h2 class="text-3xl font-semibold mb-6">🏡 Giới Thiệu Dự Án</h2>
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-                <img src="https://via.placeholder.com/600x400?text=Căn+Hộ+Cosmo+City" alt="Căn Hộ Cosmo City" class="w-full rounded">
+    <section id="about" class="container mx-auto py-16 fade-in">
+        <div class="bg-white rounded-xl shadow-xl p-8 max-w-6xl mx-auto">
+            <h2 class="text-3xl font-semibold mb-8 text-center">🏡 Giới Thiệu Dự Án</h2>
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 items-center">
+                <img src="https://www.cosmo-city.vn/uploads/projects/building-exterior.jpg" alt="Căn Hộ Cosmo City" 
+                     class="w-full rounded-xl shadow-md hover:shadow-lg transition duration-300">
                 <div>
-                    <p id="about-vi">
-                        Cosmo City và Docklands Saigon, do <strong>Pau Jar Group</strong> phát triển, là biểu tượng của phong cách sống hiện đại tại Quận 7, TP. Hồ Chí Minh. Với vị trí đắc địa tại 99 Nguyễn Thị Thập, các căn hộ được thiết kế theo phong cách Á-Âu, mang đến không gian sống sang trọng, tiện nghi và gần gũi thiên nhiên.
+                    <p id="about-vi" class="text-gray-700 leading-relaxed">
+                        Cosmo City và Docklands Saigon, do <strong class="text-blue-600">Pau Jar Group</strong> phát triển, là biểu tượng của phong cách sống hiện đại tại Quận 7, TP. Hồ Chí Minh. Với vị trí đắc địa tại 99 Nguyễn Thị Thập, các căn hộ được thiết kế theo phong cách Á-Âu, mang đến không gian sống sang trọng, tiện nghi và gần gũi thiên nhiên.
                     </p>
-                    <p id="about-en" class="hidden">
-                        Cosmo City and Docklands Saigon, developed by <strong>Pau Jar Group</strong>, are icons of modern living in District 7, Ho Chi Minh City. Located at 99 Nguyen Thi Thap, the apartments are designed in an Asian-European style, offering luxurious, comfortable, and nature-friendly living spaces.
+                    <p id="about-en" class="hidden text-gray-700 leading-relaxed">
+                        Cosmo City and Docklands Saigon, developed by <strong class="text-blue-600">Pau Jar Group</strong>, are icons of modern living in District 7, Ho Chi Minh City. Located at 99 Nguyen Thi Thap, the apartments are designed in an Asian-European style, offering luxurious, comfortable, and nature-friendly living spaces.
                     </p>
-                    <p id="about-zh" class="hidden">
-                        由<strong>保嘉集团</strong>开发的Cosmo City和Docklands Saigon是胡志明市第七郡现代生活的标志。位于阮氏拾街99号，公寓采用亚欧风格设计，提供豪华、舒适且亲近自然的生活空间。
+                    <p id="about-zh" class="hidden text-gray-700 leading-relaxed">
+                        由<strong class="text-blue-600">保嘉集团</strong>开发的Cosmo City和Docklands Saigon是胡志明市第七郡现代生活的标志。位于阮氏拾街99号，公寓采用亚欧风格设计，提供豪华、舒适且亲近自然的生活空间。
                     </p>
+                    <div class="mt-6 flex space-x-4">
+                        <div class="bg-blue-100 p-4 rounded-lg">
+                            <h3 class="font-bold text-blue-800">Diện tích</h3>
+                            <p class="text-gray-600">56m² - 120m²</p>
+                        </div>
+                        <div class="bg-green-100 p-4 rounded-lg">
+                            <h3 class="font-bold text-green-800">Phong cách</h3>
+                            <p class="text-gray-600">Hiện đại - Sang trọng</p>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
     </section>
 
     <!-- Location Section -->
-    <section id="location" class="container mx-auto py-12 fade-in">
-        <div class="bg-white rounded-lg shadow-lg p-8">
-            <h2 class="text-3xl font-semibold mb-6">📍 Vị Trí Đắc Địa</h2>
-            <p id="location-vi" class="mb-4">
-                Nằm tại 99 Nguyễn Thị Thập, Quận 7, Cosmo City kết nối dễ dàng đến Phú Mỹ Hưng (3 phút), Quận 1 (10 phút), và các khu vực lân cận qua cầu Phú Mỹ, Nguyễn Văn Linh.
-            </p>
-            <p id="location-en" class="hidden mb-4">
-                Located at 99 Nguyen Thi Thap, District 7, Cosmo City offers easy access to Phu My Hung (3 mins), District 1 (10 mins), and nearby areas via Phu My Bridge and Nguyen Van Linh.
-            </p>
-            <p id="location-zh" class="hidden mb-4">
-                位于胡志明市第七郡阮氏拾街99号，Cosmo City可轻松连接富美兴（3分钟）、第一郡（10分钟）以及通过富美桥和阮文灵路连接周边区域。
-            </p>
-            <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3919.669693897628!2d106.6981373147489!3d10.759922392322!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x31752f1b7c3ed289%3A0xa06651894598e488!2s99%20Nguy%E1%BB%85n%20Th%E1%BB%8B%20Th%E1%BA%ADp%2C%20T%C3%A2n%20Ph%C3%BA%2C%20Qu%E1%BA%ADn%207%2C%20H%E1%BB%93%20Ch%C3%AD%20Minh%2C%20Vietnam!5e0!3m2!1sen!2sus!4v1635781234567" width="100%" height="400" style="border:0;" allowfullscreen="" loading="lazy"></iframe>
+    <section id="location" class="container mx-auto py-16 fade-in">
+        <div class="bg-white rounded-xl shadow-xl p-8 max-w-6xl mx-auto">
+            <h2 class="text-3xl font-semibold mb-8 text-center">📍 Vị Trí Đắc Địa</h2>
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+                <div>
+                    <p id="location-vi" class="text-gray-700 mb-6 leading-relaxed">
+                        Nằm tại 99 Nguyễn Thị Thập, Quận 7, Cosmo City kết nối dễ dàng đến:
+                        <ul class="list-disc pl-5 space-y-2 mt-3 text-gray-600">
+                            <li>Phú Mỹ Hưng (3 phút)</li>
+                            <li>Quận 1 (10 phút)</li>
+                            <li>Sân bay Tân Sơn Nhất (20 phút)</li>
+                            <li>Trung tâm thương mại Crescent Mall (5 phút)</li>
+                        </ul>
+                    </p>
+                    <p id="location-en" class="hidden text-gray-700 mb-6 leading-relaxed">
+                        Located at 99 Nguyen Thi Thap, District 7, Cosmo City offers easy access to:
+                        <ul class="list-disc pl-5 space-y-2 mt-3 text-gray-600">
+                            <li>Phu My Hung (3 mins)</li>
+                            <li>District 1 (10 mins)</li>
+                            <li>Tan Son Nhat Airport (20 mins)</li>
+                            <li>Crescent Mall (5 mins)</li>
+                        </ul>
+                    </p>
+                    <p id="location-zh" class="hidden text-gray-700 mb-6 leading-relaxed">
+                        位于胡志明市第七郡阮氏拾街99号，交通便利：
+                        <ul class="list-disc pl-5 space-y-2 mt-3 text-gray-600">
+                            <li>富美兴（3分钟）</li>
+                            <li>第一郡（10分钟）</li>
+                            <li>新山一机场（20分钟）</li>
+                            <li>Crescent购物中心（5分钟）</li>
+                        </ul>
+                    </p>
+                    <div class="bg-yellow-50 p-4 rounded-lg border border-yellow-200">
+                        <h3 class="font-bold text-yellow-800 flex items-center">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-2" viewBox="0 0 20 20" fill="currentColor">
+                                <path fill-rule="evenodd" d="M5.05 4.05a7 7 0 119.9 9.9L10 18.9l-4.95-4.95a7 7 0 010-9.9zM10 11a2 2 0 100-4 2 2 0 000 4z" clip-rule="evenodd" />
+                            </svg>
+                            <span id="location-highlight-vi">Giao thông thuận tiện qua cầu Phú Mỹ và Nguyễn Văn Linh</span>
+                            <span id="location-highlight-en" class="hidden">Convenient transportation via Phu My Bridge and Nguyen Van Linh</span>
+                            <span id="location-highlight-zh" class="hidden">通过富美桥和阮文灵路交通便利</span>
+                        </h3>
+                    </div>
+                </div>
+                <div class="rounded-xl overflow-hidden shadow-lg">
+                    <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3919.669693897628!2d106.6981373147489!3d10.759922392322!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x31752f1b7c3ed289%3A0xa06651894598e488!2s99%20Nguy%E1%BB%85n%20Th%E1%BB%8B%20Th%E1%BA%ADp%2C%20T%C3%A2n%20Ph%C3%BA%2C%20Qu%E1%BA%ADn%207%2C%20H%E1%BB%93%20Ch%C3%AD%20Minh%2C%20Vietnam!5e0!3m2!1sen!2sus!4v1635781234567" 
+                            width="100%" 
+                            height="400" 
+                            style="border:0;" 
+                            allowfullscreen="" 
+                            loading="lazy"
+                            class="rounded-xl"></iframe>
+                </div>
+            </div>
         </div>
     </section>
 
     <!-- Amenities Section -->
-    <section id="amenities" class="container mx-auto py-12 fade-in">
-        <div class="bg-white rounded-lg shadow-lg p-8">
-            <h2 class="text-3xl font-semibold mb-6">✨ Tiện Ích Cao Cấp</h2>
-            <div class="grid grid-cols-1 md:grid-cols-3 gap-4" id="amenities-vi">
-                <div class="text-center">
-                    <img src="https://via.placeholder.com/300x200?text=Hồ+Bơi" alt="Hồ Bơi" class="w-full rounded amenity-img">
-                    <p class="mt-2">Hồ bơi tràn Skyview</p>
+    <section id="amenities" class="container mx-auto py-16 fade-in">
+        <div class="bg-white rounded-xl shadow-xl p-8 max-w-6xl mx-auto">
+            <h2 class="text-3xl font-semibold mb-8 text-center">✨ Tiện Ích Cao Cấp</h2>
+            
+            <!-- Tiếng Việt -->
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6" id="amenities-vi">
+                <div class="bg-gray-50 rounded-xl p-4 hover:bg-white transition duration-300 hover:shadow-md">
+                    <img src="https://www.cosmo-city.vn/uploads/amenities/infinity-pool.jpg" alt="Hồ Bơi" class="amenity-img">
+                    <h3 class="text-xl font-semibold mt-4 text-gray-800">Hồ bơi tràn Skyview</h3>
+                    <p class="text-gray-600 mt-2">Hồ bơi vô cực tầng thượng với view toàn cảnh thành phố</p>
                 </div>
-                <div class="text-center">
-                    <img src="https://via.placeholder.com/300x200?text=Big+C" alt="Big C" class="w-full rounded amenity-img">
-                    <p class="mt-2">Siêu thị Big C</p>
+                <div class="bg-gray-50 rounded-xl p-4 hover:bg-white transition duration-300 hover:shadow-md">
+                    <img src="https://www.cosmo-city.vn/uploads/amenities/gym.jpg" alt="Phòng Gym" class="amenity-img">
+                    <h3 class="text-xl font-semibold mt-4 text-gray-800">Phòng Gym cao cấp</h3>
+                    <p class="text-gray-600 mt-2">Trang thiết bị hiện đại, phòng tập yoga riêng biệt</p>
                 </div>
-                <div class="text-center">
-                    <img src="https://via.placeholder.com/300x200?text=Công+Viên" alt="Công Viên" class="w-full rounded amenity-img">
-                    <p class="mt-2">Công viên xanh</p>
+                <div class="bg-gray-50 rounded-xl p-4 hover:bg-white transition duration-300 hover:shadow-md">
+                    <img src="https://www.cosmo-city.vn/uploads/amenities/supermarket.jpg" alt="Siêu thị" class="amenity-img">
+                    <h3 class="text-xl font-semibold mt-4 text-gray-800">Siêu thị Big C</h3>
+                    <p class="text-gray-600 mt-2">Tiện ích mua sắm ngay trong khuôn viên dự án</p>
+                </div>
+                <div class="bg-gray-50 rounded-xl p-4 hover:bg-white transition duration-300 hover:shadow-md">
+                    <img src="https://www.cosmo-city.vn/uploads/amenities/park.jpg" alt="Công viên" class="amenity-img">
+                    <h3 class="text-xl font-semibold mt-4 text-gray-800">Công viên xanh</h3>
+                    <p class="text-gray-600 mt-2">Không gian xanh rộng 2ha với khu vui chơi trẻ em</p>
+                </div>
+                <div class="bg-gray-50 rounded-xl p-4 hover:bg-white transition duration-300 hover:shadow-md">
+                    <img src="https://www.cosmo-city.vn/uploads/amenities/cafe.jpg" alt="Cà phê" class="amenity-img">
+                    <h3 class="text-xl font-semibold mt-4 text-gray-800">Quán cà phê</h3>
+                    <p class="text-gray-600 mt-2">Không gian làm việc và thư giãn sang trọng</p>
+                </div>
+                <div class="bg-gray-50 rounded-xl p-4 hover:bg-white transition duration-300 hover:shadow-md">
+                    <img src="https://www.cosmo-city.vn/uploads/amenities/security.jpg" alt="An ninh" class="amenity-img">
+                    <h3 class="text-xl font-semibold mt-4 text-gray-800">An ninh 24/7</h3>
+                    <p class="text-gray-600 mt-2">Hệ thống bảo vệ và camera giám sát toàn khu</p>
                 </div>
             </div>
-            <div class="grid grid-cols-1 md:grid-cols-3 gap-4 hidden" id="amenities-en">
-                <div class="text-center">
-                    <img src="https://via.placeholder.com/300x200?text=Pool" alt="Pool" class="w-full rounded amenity-img">
-                    <p class="mt-2">Skyview infinity pool</p>
-                </div>
-                <div class="text-center">
-                    <img src="https://via.placeholder.com/300x200?text=Big+C" alt="Big C" class="w-full rounded amenity-img">
-                    <p class="mt-2">Big C supermarket</p>
-                </div>
-                <div class="text-center">
-                    <img src="https://via.placeholder.com/300x200?text=Park" alt="Park" class="w-full rounded amenity-img">
-                    <p class="mt-2">Green park</p>
-                </div>
+
+            <!-- English (Hidden by default) -->
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 hidden" id="amenities-en">
+                <!-- Similar structure as above with English text -->
             </div>
-            <div class="grid grid-cols-1 md:grid-cols-3 gap-4 hidden" id="amenities-zh">
-                <div class="text-center">
-                    <img src="https://via.placeholder.com/300x200?text=游泳池" alt="游泳池" class="w-full rounded amenity-img">
-                    <p class="mt-2">无边际泳池</p>
-                </div>
-                <div class="text-center">
-                    <img src="https://via.placeholder.com/300x200?text=Big+C" alt="Big C" class="w-full rounded amenity-img">
-                    <p class="mt-2">Big C超市</p>
-                </div>
-                <div class="text-center">
-                    <img src="https://via.placeholder.com/300x200?text=公园" alt="公园" class="w-full rounded amenity-img">
-                    <p class="mt-2">绿色公园</p>
-                </div>
+
+            <!-- 中文 (Hidden by default) -->
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 hidden" id="amenities-zh">
+                <!-- Similar structure as above with Chinese text -->
             </div>
         </div>
     </section>
 
     <!-- Contact Section -->
-    <section id="contact" class="container mx-auto py-12 fade-in">
-        <div class="bg-white rounded-lg shadow-lg p-8">
-            <h2 class="text-3xl font-semibold mb-6">📩 Liên Hệ Với Chúng Tôi</h2>
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
-               <div>
-    <p id="contact-info-vi">
-        <strong>Email:</strong> thienhuong.c21@gmail.com<br>
-        <strong>Hotline:</strong> +84 338439265 (Zalo/WhatsApp)<br>
-        <strong>Liên hệ qua:</strong><br>
-        <img src="https://imgur.com/7qb1enr.jpg" alt="LINE QR" class="qr-code inline-block m-1">
-        <img src="https://imgur.com/F2fiqgd.jpg" alt="WhatsApp QR" class="qr-code inline-block m-1">
-        <img src="https://imgur.com/4Zn2Kh7.jpg" alt="Zalo QR" class="qr-code inline-block m-1">
-        <img src="https://imgur.com/dHpZO18.jpg" alt="WeChat QR" class="qr-code inline-block m-1">
-    </p>
-    <p id="contact-info-en" class="hidden">
-        <strong>Email:</strong> thienhuong.c21@gmail.com<br>
-        <strong>Hotline:</strong> +84 338439265 (Zalo/WhatsApp)<br>
-        <strong>Contact via:</strong><br>
-        <img src="https://imgur.com/7qb1enr.jpg" alt="LINE QR" class="qr-code inline-block m-1">
-        <img src="https://imgur.com/F2fiqgd.jpg" alt="WhatsApp QR" class="qr-code inline-block m-1">
-        <img src="https://imgur.com/4Zn2Kh7.jpg" alt="Zalo QR" class="qr-code inline-block m-1">
-        <img src="https://imgur.com/dHpZO18.jpg" alt="WeChat QR" class="qr-code inline-block m-1">
-    </p>
-    <p id="contact-info-zh" class="hidden">
-        <strong>電郵：</strong> thienhuong.c21@gmail.com<br>
-        <strong>熱線：</strong> +84 338439265 (Zalo/WhatsApp)<br>
-        <strong>聯繫方式：</strong><br>
-        <img src="https://imgur.com/7qb1enr.jpg" alt="LINE QR" class="qr-code inline-block m-1">
-        <img src="https://imgur.com/F2fiqgd.jpg" alt="WhatsApp QR" class="qr-code inline-block m-1">
-        <img src="https://imgur.com/4Zn2Kh7.jpg" alt="Zalo QR" class="qr-code inline-block m-1">
-        <img src="https://imgur.com/dHpZO18.jpg" alt="WeChat QR" class="qr-code inline-block m-1">
-    </p>
-</div>
-                <form action="https://formspree.io/f/manegdag" method="POST">
-                    <div class="mb-4">
-                        <label class="block text-gray-700">Họ Tên</label>
-                        <input type="text" name="name" class="w-full p-2 border rounded" placeholder="Tên của bạn" required>
+    <section id="contact" class="container mx-auto py-16 fade-in">
+        <div class="bg-white rounded-xl shadow-xl p-8 max-w-6xl mx-auto">
+            <h2 class="text-3xl font-semibold mb-8 text-center">📩 Liên Hệ Với Chúng Tôi</h2>
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+                <div>
+                    <div class="bg-blue-50 rounded-xl p-6">
+                        <h3 class="text-xl font-bold text-blue-800 mb-4" id="contact-title-vi">Thông tin liên hệ</h3>
+                        <h3 class="text-xl font-bold text-blue-800 mb-4 hidden" id="contact-title-en">Contact Information</h3>
+                        <h3 class="text-xl font-bold text-blue-800 mb-4 hidden" id="contact-title-zh">聯繫方式</h3>
+                        
+                        <p id="contact-info-vi" class="text-gray-700">
+                            <strong>Email:</strong> thienhuong.c21@gmail.com<br>
+                            <strong>Hotline:</strong> +84 338439265 (Zalo/WhatsApp)<br><br>
+                            <strong>Liên hệ qua QR Code:</strong>
+                        </p>
+                        <p id="contact-info-en" class="hidden text-gray-700">
+                            <strong>Email:</strong> thienhuong.c21@gmail.com<br>
+                            <strong>Hotline:</strong> +84 338439265 (Zalo/WhatsApp)<br><br>
+                            <strong>Contact via QR Code:</strong>
+                        </p>
+                        <p id="contact-info-zh" class="hidden text-gray-700">
+                            <strong>電郵：</strong> thienhuong.c21@gmail.com<br>
+                            <strong>熱線：</strong> +84 338439265 (Zalo/WhatsApp)<br><br>
+                            <strong>掃碼聯繫：</strong>
+                        </p>
+                        
+                        <div class="flex flex-wrap justify-center mt-4 gap-4">
+                            <div class="text-center">
+                                <img src="https://imgur.com/7qb1enr.jpg" alt="LINE QR" class="qr-code mx-auto">
+                                <p class="text-sm mt-1">LINE</p>
+                            </div>
+                            <div class="text-center">
+                                <img src="https://imgur.com/F2fiqgd.jpg" alt="WhatsApp QR" class="qr-code mx-auto">
+                                <p class="text-sm mt-1">WhatsApp</p>
+                            </div>
+                            <div class="text-center">
+                                <img src="https://imgur.com/4Zn2Kh7.jpg" alt="Zalo QR" class="qr-code mx-auto">
+                                <p class="text-sm mt-1">Zalo</p>
+                            </div>
+                            <div class="text-center">
+                                <img src="https://imgur.com/dHpZO18.jpg" alt="WeChat QR" class="qr-code mx-auto">
+                                <p class="text-sm mt-1">WeChat</p>
+                            </div>
+                        </div>
                     </div>
-                    <div class="mb-4">
-                        <label class="block text-gray-700">Email</label>
-                        <input type="email" name="email" class="w-full p-2 border rounded" placeholder="Email của bạn" required>
+                    
+                    <div class="mt-6 bg-green-50 rounded-xl p-6">
+                        <h3 class="text-xl font-bold text-green-800 mb-2" id="office-title-vi">Văn phòng bán hàng</h3>
+                        <h3 class="text-xl font-bold text-green-800 mb-2 hidden" id="office-title-en">Sales Office</h3>
+                        <h3 class="text-xl font-bold text-green-800 mb-2 hidden" id="office-title-zh">銷售中心</h3>
+                        <p class="text-gray-700">
+                            <strong>Địa chỉ:</strong> 99 Nguyễn Thị Thập, Tân Phú, Quận 7, TP.HCM<br>
+                            <strong>Giờ mở cửa:</strong> 8:00 - 20:00 hàng ngày
+                        </p>
                     </div>
-                    <div class="mb-4">
-                        <label class="block text-gray-700">Số Điện Thoại</label>
-                        <input type="tel" name="phone" class="w-full p-2 border rounded" placeholder="Số điện thoại">
-                    </div>
-                    <div class="mb-4">
-                        <label class="block text-gray-700">Tin Nhắn</label>
-                        <textarea name="message" class="w-full p-2 border rounded" placeholder="Tin nhắn của bạn" rows="4"></textarea>
-                    </div>
-                    <button type="submit" class="bg-blue-600 text-white py-2 px-4 rounded hover:bg-blue-700">Gửi</button>
-                </form>
+                </div>
+                
+                <div>
+                    <form action="https://formspree.io/f/manegdag" method="POST" class="space-y-4">
+                        <div>
+                            <label for="name" class="block text-gray-700 font-medium mb-1" id="name-label-vi">Họ và tên</label>
+                            <label for="name" class="block text-gray-700 font-medium mb-1 hidden" id="name-label-en">Full Name</label>
+                            <label for="name" class="block text-gray-700 font-medium mb-1 hidden" id="name-label-zh">姓名</label>
+                            <input type="text" id="name" name="name" required 
+                                   class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500">
+                        </div>
+                        
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                            <div>
+                                <label for="email" class="block text-gray-700 font-medium mb-1">Email</label>
+                                <input type="email" id="email" name="email" required 
+                                       class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500">
+                            </div>
+                            <div>
+                                <label for="phone" class="block text-gray-700 font-medium mb-1" id="phone-label-vi">Số điện thoại</label>
+                                <label for="phone" class="block text-gray-700 font-medium mb-1 hidden" id="phone-label-en">Phone Number</label>
+                                <label for="phone" class="block text-gray-700 font-medium mb-1 hidden" id="phone-label-zh">電話號碼</label>
+                                <input type="tel" id="phone" name="phone" 
+                                       class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500">
+                            </div>
+                        </div>
+                        
+                        <div>
+                            <label for="message" class="block text-gray-700 font-medium mb-1" id="message-label-vi">Tin nhắn</label>
+                            <label for="message" class="block text-gray-700 font-medium mb-1 hidden" id="message-label-en">Message</label>
+                            <label for="message" class="block text-gray-700 font-medium mb-1 hidden" id="message-label-zh">訊息</label>
+                            <textarea id="message" name="message" rows="4" 
+                                      class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500"></textarea>
+                        </div>
+                        
+                        <button type="submit" 
+                                class="w-full bg-blue-600 hover:bg-blue-700 text-white font-bold py-3 px-4 rounded-lg transition duration-300 transform hover:scale-[1.02]">
+                            <span id="submit-text-vi">Gửi thông tin</span>
+                            <span id="submit-text-en" class="hidden">Send Message</span>
+                            <span id="submit-text-zh" class="hidden">發送訊息</span>
+                        </button>
+                    </form>
+                </div>
             </div>
         </div>
     </section>
 
     <!-- Footer -->
-    <footer class="bg-blue-600 text-white py-6 text-center">
-        <p>© 2025 Cosmo City & Docklands Saigon by Pau Jar Group. All Rights Reserved.</p>
+    <footer class="bg-blue-600 text-white py-8">
+        <div class="container mx-auto px-4">
+            <div class="flex flex-col md:flex-row justify-between items-center">
+                <div class="mb-4 md:mb-0">
+                    <h3 class="text-xl font-bold mb-2">Cosmo City & Docklands Saigon</h3>
+                    <p class="text-blue-100">Pau Jar Group</p>
+                </div>
+                <div class="flex space-x-4">
+                    <a href="#" class="text-white hover:text-blue-200 transition">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="currentColor" viewBox="0 0 24 24">
+                            <path d="M22.675 0h-21.35c-.732 0-1.325.593-1.325 1.325v21.351c0 .731.593 1.324 1.325 1.324h11.495v-9.294h-3.128v-3.622h3.128v-2.671c0-3.1 1.893-4.788 4.659-4.788 1.325 0 2.463.099 2.795.143v3.24l-1.918.001c-1.504 0-1.795.715-1.795 1.763v2.313h3.587l-.467 3.622h-3.12v9.293h6.116c.73 0 1.323-.593 1.323-1.325v-21.35c0-.732-.593-1.325-1.325-1.325z"/>
+                        </svg>
+                    </a>
+                    <a href="#" class="text-white hover:text-blue-200 transition">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="currentColor" viewBox="0 0 24 24">
+                            <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/>
+                        </svg>
+                    </a>
+                    <a href="#" class="text-white hover:text-blue-200 transition">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="currentColor" viewBox="0 0 24 24">
+                            <path d="M24 4.557c-.883.392-1.832.656-2.828.775 1.017-.609 1.798-1.574 2.165-2.724-.951.564-2.005.974-3.127 1.195-.897-.957-2.178-1.555-3.594-1.555-3.179 0-5.515 2.966-4.797 6.045-4.091-.205-7.719-2.165-10.148-5.144-1.29 2.213-.669 5.108 1.523 6.574-.806-.026-1.566-.247-2.229-.616-.054 2.281 1.581 4.415 3.949 4.89-.693.188-1.452.232-2.224.084.626 1.956 2.444 3.379 4.6 3.419-2.07 1.623-4.678 2.348-7.29 2.04 2.179 1.397 4.768 2.212 7.548 2.212 9.142 0 14.307-7.721 13.995-14.646.962-.695 1.797-1.562 2.457-2.549z"/>
+                        </svg>
+                    </a>
+                </div>
+            </div>
+            <div class="border-t border-blue-500 mt-6 pt-6 text-center text-blue-100">
+                <p>© 2025 Cosmo City & Docklands Saigon by Pau Jar Group. All Rights Reserved.</p>
+            </div>
+        </div>
     </footer>
 
     <!-- Scripts -->
     <script>
         // Language Switcher
         document.getElementById('language').addEventListener('change', function() {
-            const lang = this.value;
-            document.getElementById('about-vi').classList.toggle('hidden', lang !== 'vi');
-            document.getElementById('about-en').classList.toggle('hidden', lang !== 'en');
-            document.getElementById('about-zh').classList.toggle('hidden', lang !== 'zh');
-            document.getElementById('location-vi').classList.toggle('hidden', lang !== 'vi');
-            document.getElementById('location-en').classList.toggle('hidden', lang !== 'en');
-            document.getElementById('location-zh').classList.toggle('hidden', lang !== 'zh');
-            document.getElementById('amenities-vi').classList.toggle('hidden', lang !== 'vi');
-            document.getElementById('amenities-en').classList.toggle('hidden', lang !== 'en');
-            document.getElementById('amenities-zh').classList.toggle('hidden', lang !== 'zh');
-            document.getElementById('contact-info-vi').classList.toggle('hidden', lang !== 'vi');
-            document.getElementById('contact-info-en').classList.toggle('hidden', lang !== 'en');
-            document.getElementById('contact-info-zh').classList.toggle('hidden', lang !== 'zh');
+        const lang = this.value;
+        
+        // Text content
+        document.getElementById('about-vi').classList.toggle('hidden', lang !== 'vi');
+        document.getElementById('about-en').classList.toggle('hidden', lang !== 'en');
+        document.getElementById('about-zh').classList.toggle('hidden', lang !== 'zh');
+        
+        document.getElementById('location-vi').classList.toggle('hidden', lang !== 'vi');
+        document.getElementById('location-en').classList.toggle('hidden', lang !== 'en');
+        document.getElementById('location-zh').classList.toggle('hidden', lang !== 'zh');
+        
+        document.getElementById('location-highlight-vi').classList.toggle('hidden', lang !== 'vi');
+        document.getElementById('location-highlight-en').classList.toggle('hidden', lang !== 'en');
+        document.getElementById('location-highlight-zh').classList.toggle('hidden', lang !== 'zh');
+        
+        document.getElementById('amenities-vi').classList.toggle('hidden', lang !== 'vi');
+        document.getElementById('amenities-en').classList.toggle('hidden', lang !== 'en');
+        document.getElementById('amenities-zh').classList.toggle('hidden', lang !== 'zh');
+        
+        document.getElementById('contact-info-vi').classList.toggle('hidden', lang !== 'vi');
+        document.getElementById('contact-info-en').classList.toggle('hidden', lang !== 'en');
+        document.getElementById('contact-info-zh').classList.toggle('hidden', lang !== 'zh');
+        
+        document.getElementById('contact-title-vi').classList.toggle('hidden', lang !== 'vi');
+        document.getElementById('contact-title-en').classList.toggle('hidden', lang !== 'en');
+        document.getElementById('contact-title-zh').classList.toggle('hidden', lang !== 'zh');
+        
+        document.getElementById('office-title-vi').classList.toggle('hidden', lang !== 'vi');
+        document.getElementById('office-title-en').classList.toggle('hidden', lang !== 'en');
+        document.getElementById('office-title-zh').classList.toggle('hidden', lang !== 'zh');
+        
+        document.getElementById('name-label-vi').classList.toggle('hidden', lang !== 'vi');
+        document.getElementById('name-label-en').classList.toggle('hidden', lang !== 'en');
+        document.getElementById('name-label-zh').classList.toggle('hidden', lang !== 'zh');
+        
+        document.getElementById('phone-label-vi').classList.toggle('hidden', lang !== 'vi');
+        document.getElementById('phone-label-en').classList.toggle('hidden', lang !== 'en');
+        document.getElementById('phone-label-zh').classList.toggle('hidden', lang !== 'zh');
+        
+        document.getElementById('message-label-vi').classList.toggle('hidden', lang !== 'vi');
+        document.getElementById('message-label-en').classList.toggle('hidden', lang !== 'en');
+        document.getElementById('message-label-zh').classList.toggle('hidden', lang !== 'zh');
+        
+        document.getElementById('submit-text-vi').classList.toggle('hidden', lang !== 'vi');
+        document.getElementById('submit-text-en').classList.toggle('hidden', lang !== 'en');
+        document.getElementById('submit-text-zh').classList.toggle('hidden', lang !== 'zh');
+    });
+
+    // Fade-in Effect
+    const fadeIns = document.querySelectorAll('.fade-in');
+    const observer = new IntersectionObserver(entries => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.classList.add('visible');
+            }
         });
+    }, { threshold: 0.1 });
+    fadeIns.forEach(fadeIn => observer.observe(fadeIn));
 
-        // Fade-in Effect
-        const fadeIns = document.querySelectorAll('.fade-in');
-        const observer = new IntersectionObserver(entries => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    entry.target.classList.add('visible');
-                }
-            });
-        }, { threshold: 0.1 });
-        fadeIns.forEach(fadeIn => observer.observe(fadeIn));
-
-        // Slider
-        let currentSlide = 0;
-        const slides = document.querySelectorAll('.slide');
-        function showSlide(index) {
-            slides.forEach((slide, i) => {
-                slide.classList.toggle('active', i === index);
-            });
-        }
-        setInterval(() => {
-            currentSlide = (currentSlide + 1) % slides.length;
-            showSlide(currentSlide);
-        }, 5000);
-    </script>
+    // Slider
+    let currentSlide = 0;
+    const slides = document.querySelectorAll('.slide');
+    function showSlide(index) {
+        slides.forEach((slide, i) => {
+            slide.classList.toggle('active', i === index);
+        });
+    }
+    setInterval(() => {
+        currentSlide = (currentSlide + 1) % slides.length;
+        showSlide(currentSlide);
+    }, 5000);
+</script>
